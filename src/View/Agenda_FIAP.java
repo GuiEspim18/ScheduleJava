@@ -10,6 +10,7 @@ import static Model.CRUD_DAO.url;
 import static Model.CRUD_DAO.username;
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
