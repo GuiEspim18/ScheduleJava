@@ -5,13 +5,20 @@
  */
 package View;
 
+import static Model.CRUD_DAO.password;
+import static Model.CRUD_DAO.url;
+import static Model.CRUD_DAO.username;
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -24,6 +31,48 @@ public class Agenda_FIAP extends javax.swing.JFrame {
     
     public Agenda_FIAP() {
         initComponents();
+    }
+    
+    public static DefaultTableModel cliente(ResultSet rs) {
+        try {
+           ResultSetMetaData metaData = rs.getMetaData();
+         int numberOfColumns = metaData.getColumnCount();
+            Vector columnNames = new Vector();
+       // AS LINHAS ABAIXO SÃO REFERENTES AOS CAMPOS DA TABELA CLIENTE
+            columnNames.addElement("Código");
+            columnNames.addElement("Nome");
+            columnNames.addElement("Endereço");
+            columnNames.addElement("Telefone");
+            Vector rows = new Vector();
+            while (rs.next()) {
+                Vector newRow = new Vector();
+                for (int i = 1; i <= numberOfColumns; i++) {
+                    newRow.addElement(rs.getObject(i));
+                }
+                rows.addElement(newRow);
+            }
+           return new DefaultTableModel(rows, columnNames);
+       } catch (Exception e) {
+ 
+           return null;
+        }
+    }
+    
+    public void refresh(){
+    try{
+       Connection conn;
+              conn = (Connection) DriverManager.getConnection(url, username, password);
+
+
+                        System.out.println("realizado");
+                    String sql = "SELECT * FROM cliente;";
+        PreparedStatement pst = (PreparedStatement) conn.prepareStatement(sql);
+        ResultSet rs = pst.executeQuery();
+        dados.setModel(cliente(rs));
+        }
+        catch(Exception e){
+        JOptionPane.showMessageDialog(null, e);
+        }    
     }
 
     /**
@@ -38,7 +87,7 @@ public class Agenda_FIAP extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        dados = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         cod1_txt = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -71,7 +120,7 @@ public class Agenda_FIAP extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
         jPanel2.setLayout(null);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        dados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -82,7 +131,7 @@ public class Agenda_FIAP extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(dados);
 
         jPanel2.add(jScrollPane1);
         jScrollPane1.setBounds(0, 0, 400, 90);
@@ -319,6 +368,7 @@ public class Agenda_FIAP extends javax.swing.JFrame {
     public static javax.swing.JTextField cod1_txt;
     public static javax.swing.JTextField cod2_txt;
     private javax.swing.JButton consultar_BTN;
+    private javax.swing.JTable dados;
     public static javax.swing.JTextField end1_txt;
     public static javax.swing.JTextField end_txt;
     private javax.swing.JButton excluir_btn;
@@ -336,7 +386,6 @@ public class Agenda_FIAP extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton limpar_btn;
     public static javax.swing.JTextField nome1_txt;
     public static javax.swing.JTextField nome_txt;
