@@ -271,7 +271,7 @@ public class Agenda_FIAP extends javax.swing.JFrame {
         String x = JOptionPane.showInputDialog(null, "Deseja realmente excluir?\n1-Sim\n2-Não");
         int valor = Integer.parseInt(x);
         if (valor == 1) {
-            
+            Model.CRUD_DAO.delete();
         } else {
             JOptionPane.showMessageDialog(null, "Continuando...");
         }
@@ -317,7 +317,7 @@ public class Agenda_FIAP extends javax.swing.JFrame {
     private javax.swing.JButton SALVAR_BTN;
     private javax.swing.JButton alterar_BTN;
     public static javax.swing.JTextField cod1_txt;
-    private javax.swing.JTextField cod2_txt;
+    public static javax.swing.JTextField cod2_txt;
     private javax.swing.JButton consultar_BTN;
     public static javax.swing.JTextField end1_txt;
     public static javax.swing.JTextField end_txt;

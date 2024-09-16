@@ -13,6 +13,7 @@ import static View.Agenda_FIAP.nome1_txt;
 import static View.Agenda_FIAP.nome_txt;
 import static View.Agenda_FIAP.tel1_txt;
 import static View.Agenda_FIAP.tel_txt;
+import static View.Agenda_FIAP.cod2_txt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -101,8 +102,7 @@ em = end_txt.getText(); // recebendo o email
        try{     //Iniciando o possivel tratamento de erros
             //Declarando a variavel código
 
-            int codigo = Integer.valueOf(cod1_txt.getText());
-
+            int codigo = Integer.valueOf(cod2_txt.getText());
             
 
             try {// Tratamento de erro para a conexao
@@ -214,6 +214,45 @@ em = end_txt.getText(); // recebendo o email
         // Término do código
         
         
+    }
+    
+    public static void delete(){
+              int codigo = Integer.valueOf(cod2_txt.getText()); // Recebendo o código
+ 
+                
+ 
+        try {// Tratamento de erro para a conexao
+            // Declarando  a variavel de conexão con
+            // e estabelendo a conexão
+            Connection con = null;
+ 
+                try {
+                    con = (Connection) DriverManager.getConnection(url, username, password);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Agenda_FIAP.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+ 
+            // Criando String com comando SQL para exclusão
+            String sql = "DELETE FROM cliente WHERE cli_cod = "+ codigo;
+ 
+            try // Tratamento de erros para exclusão
+            {// Criando Variavel para executar a ação
+                PreparedStatement excluir = (PreparedStatement) con.prepareStatement(sql);
+                excluir.execute();// Executando a exclusão
+ 
+                JOptionPane.showMessageDialog(null,"\nExclusão realizada com sucesso!!!\n","",-1);
+                cod2_txt.setText("");
+ 
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,"\nErro na exclusão!","ERRO!",0);
+            }
+ 
+        } catch(NumberFormatException erro){ // Codigo digitado com caracteres não numericos
+            JOptionPane.showMessageDialog(null,"Digite o código corretamante","ERRO",0);
+            cod2_txt.setText("");
+ 
+        }
     }
     
     
