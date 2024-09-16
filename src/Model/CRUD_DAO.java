@@ -6,6 +6,7 @@
 package Model;
 
 import View.Agenda_FIAP;
+import static View.Agenda_FIAP.cliente;
 import static View.Agenda_FIAP.cod1_txt;
 import static View.Agenda_FIAP.end1_txt;
 import static View.Agenda_FIAP.end_txt;
@@ -253,6 +254,23 @@ em = end_txt.getText(); // recebendo o email
             cod2_txt.setText("");
  
         }
+    }
+    
+        
+    public void refresh(){
+        try{
+            com.mysql.jdbc.Connection conn;
+            conn = (com.mysql.jdbc.Connection) DriverManager.getConnection(url, username, password);
+
+
+            System.out.println("realizado");
+            String sql = "SELECT * FROM cliente;";
+            PreparedStatement pst = (PreparedStatement) conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            dados.setModel(cliente(rs));
+        } catch(Exception e){
+        JOptionPane.showMessageDialog(null, e);
+        }    
     }
     
     

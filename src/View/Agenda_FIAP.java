@@ -58,23 +58,6 @@ public class Agenda_FIAP extends javax.swing.JFrame {
            return null;
         }
     }
-    
-    public void refresh(){
-    try{
-       Connection conn;
-              conn = (Connection) DriverManager.getConnection(url, username, password);
-
-
-                        System.out.println("realizado");
-                    String sql = "SELECT * FROM cliente;";
-        PreparedStatement pst = (PreparedStatement) conn.prepareStatement(sql);
-        ResultSet rs = pst.executeQuery();
-        dados.setModel(cliente(rs));
-        }
-        catch(Exception e){
-        JOptionPane.showMessageDialog(null, e);
-        }    
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
