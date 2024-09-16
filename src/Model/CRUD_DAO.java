@@ -198,11 +198,7 @@ em = end_txt.getText(); // recebendo o email
                 inserir.execute(); // Executando a inserção
 
                 JOptionPane.showMessageDialog(null,"\nAtualização realizada com sucesso!!!\n","",-1);
-               cod1_txt.setText("");
-                nome1_txt.setText("");
-               end1_txt.setText("");
-                tel1_txt.setText("");
-
+                limpar();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null,"\nErro na inserção!","ERRO!",0);
             }
@@ -221,6 +217,11 @@ em = end_txt.getText(); // recebendo o email
     }
     
     
-    
+    public static void limpar() {
+        cod1_txt.setText("");
+        nome1_txt.setText("");
+        end1_txt.setText("");
+        tel1_txt.setText("");
+    }
     
 }

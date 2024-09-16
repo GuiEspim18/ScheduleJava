@@ -49,7 +49,11 @@ public class Agenda_FIAP extends javax.swing.JFrame {
         tel1_txt = new javax.swing.JTextField();
         consultar_BTN = new javax.swing.JButton();
         alterar_BTN = new javax.swing.JButton();
+        limpar_btn = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jLabel9 = new javax.swing.JLabel();
+        cod2_txt = new javax.swing.JTextField();
+        excluir_btn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -125,17 +129,54 @@ public class Agenda_FIAP extends javax.swing.JFrame {
         jPanel2.add(alterar_BTN);
         alterar_BTN.setBounds(280, 140, 110, 30);
 
+        limpar_btn.setText("LIMPAR");
+        limpar_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                limpar_btnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(limpar_btn);
+        limpar_btn.setBounds(280, 180, 110, 30);
+
         jTabbedPane1.addTab("CONSULTAR/ ALTERAR", jPanel2);
+
+        jPanel3.setBackground(new java.awt.Color(204, 204, 255));
+
+        jLabel9.setText("INSIRA O CÓDIGO QUE DESEJA EXCLUIR");
+
+        excluir_btn.setText("EXCLUIR");
+        excluir_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                excluir_btnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 395, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addComponent(jLabel9))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(137, 137, 137)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cod2_txt)
+                            .addComponent(excluir_btn, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE))))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 275, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(cod2_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(excluir_btn)
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("EXCLUIR", jPanel3);
@@ -174,7 +215,7 @@ public class Agenda_FIAP extends javax.swing.JFrame {
             }
         });
         jPanel1.add(FECHAR_BTN);
-        FECHAR_BTN.setBounds(300, 230, 80, 30);
+        FECHAR_BTN.setBounds(300, 220, 80, 30);
 
         SALVAR_BTN.setText("SALVAR");
         SALVAR_BTN.addActionListener(new java.awt.event.ActionListener() {
@@ -220,6 +261,22 @@ public class Agenda_FIAP extends javax.swing.JFrame {
        Model.CRUD_DAO.atualizar();
     }//GEN-LAST:event_alterar_BTNActionPerformed
 
+    private void limpar_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpar_btnActionPerformed
+        // TODO add your handling code here:
+        Model.CRUD_DAO.limpar();
+    }//GEN-LAST:event_limpar_btnActionPerformed
+
+    private void excluir_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_excluir_btnActionPerformed
+        // TODO add your handling code here:
+        String x = JOptionPane.showInputDialog(null, "Deseja realmente excluir?\n1-Sim\n2-Não");
+        int valor = Integer.parseInt(x);
+        if (valor == 1) {
+            
+        } else {
+            JOptionPane.showMessageDialog(null, "Continuando...");
+        }
+    }//GEN-LAST:event_excluir_btnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -260,9 +317,11 @@ public class Agenda_FIAP extends javax.swing.JFrame {
     private javax.swing.JButton SALVAR_BTN;
     private javax.swing.JButton alterar_BTN;
     public static javax.swing.JTextField cod1_txt;
+    private javax.swing.JTextField cod2_txt;
     private javax.swing.JButton consultar_BTN;
     public static javax.swing.JTextField end1_txt;
     public static javax.swing.JTextField end_txt;
+    private javax.swing.JButton excluir_btn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -271,12 +330,14 @@ public class Agenda_FIAP extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton limpar_btn;
     public static javax.swing.JTextField nome1_txt;
     public static javax.swing.JTextField nome_txt;
     public static javax.swing.JTextField tel1_txt;
